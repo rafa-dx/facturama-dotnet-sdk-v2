@@ -11,4 +11,10 @@
     <InternalsVisibleTo Include="Facturama.Sdk.Tests" />
   </ItemGroup>
 
+  <!-- En net8.0 System.Text.Json viene en el framework compartido; en netstandard2.0 hay que
+       traerlo como paquete. 8.0.6 es la última 8.x parcheada (las <8.0.5 arrastran CVE-2024-43485). -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Text.Json" Version="8.0.6" />
+  </ItemGroup>
+
 </Project>
