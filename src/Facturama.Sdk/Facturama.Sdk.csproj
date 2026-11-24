@@ -6,6 +6,11 @@
     <Nullable>enable</Nullable>
 	  <LangVersion>10.0</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Description>SDK en .NET para consumir la API de facturación electrónica de Facturama (CFDI 4.0, México). Cubre CFDI (API Web y Lite), clientes, catálogos del SAT y retenciones y manejo de excepciones tipadas.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>facturama;cfdi;sat;factura;facturacion;mexico;invoice;electronic-invoice</PackageTags>
+    <AssemblyVersion></AssemblyVersion>
+    <Version>1.0.0</Version>
   </PropertyGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Facturama.Sdk.Tests" />
@@ -15,6 +20,12 @@
        traerlo como paquete. 8.0.6 es la última 8.x parcheada (las <8.0.5 arrastran CVE-2024-43485). -->
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Text.Json" Version="8.0.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
