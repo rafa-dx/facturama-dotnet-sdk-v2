@@ -43,13 +43,29 @@ public sealed class FacturamaOptions
 
     public TimeSpan Timeout { get; set; } = TimeSpan.FromSeconds(30);
 
+    /// <summary>
+    /// URL base explícita para escenarios de prueba local (mock server, WireMock, contenedor).
+    /// Cuando se especifica, <see cref="Environment"/> se ignora.
+    /// <para>
+    /// Debe ser una URL absoluta con esquema http o https. Se admite <c>http://</c> únicamente
+    /// en loopback: Basic Auth viaja en base64, así que apuntar a un host remoto sin TLS
+    /// expondría las credenciales de la cuenta.
+    /// </para>
+    /// </summary>
+
     public Uri? BaseUrlOverride { get; set; }
 
     /// <summary>
     /// URL base efectiva, sin diagonal final: <see cref="BaseUrlOverride"/> si está presente,
     /// o la que corresponda al <see cref="Environment"/> configurado.
     /// </summary>
-    /// 
+    internal string BaseUrl =>
+        BaseUrlOverride?.AbsoluteUri.TrimEnd('/') ?? EnvironmentBaseUrl;
+
+    /// <summary>
+    /// URL base efectiva, sin diagonal final: <see cref="BaseUrlOverride"/> si está presente,
+    /// o la que corresponda al <see cref="Environment"/> configurado.
+    /// </summary>
     private string EnvironmentBaseUrl => Environment == FacturamaEnvironment.Production
         ? "https://api.facturama.mx"
         : "https://apisandbox.facturama.mx";
