@@ -98,12 +98,12 @@ public sealed class FacturamaOptions
         if (string.IsNullOrWhiteSpace(Password))
             throw new ArgumentException("El Password es requerido.", nameof(Password));
 
-        //if (Timeout <= TimeSpan.Zero)
-        //   throw new ArgumentOutOfRangeException(nameof(Timeout), Timeout, "Debe ser mayor a cero.");
+        if (Timeout <= TimeSpan.Zero)
+           throw new ArgumentOutOfRangeException(nameof(Timeout), Timeout, "Debe ser mayor a cero.");
 
         ValidateBaseUrlOverride();
 
-        //Retry.Validate();
+        Retry.Validate();
         //CircuitBreaker.Validate();
     }
 
